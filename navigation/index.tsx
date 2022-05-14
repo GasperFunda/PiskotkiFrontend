@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -12,7 +12,7 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable } from "react-native";
+import { Button, ColorSchemeName, Pressable } from "react-native";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
@@ -69,7 +69,7 @@ function RootNavigator() {
   }, []);
   return (
     <Stack.Navigator>
-      {user && (
+      {!user && (
         <>
           <Stack.Screen
             name="SignIn"
@@ -106,7 +106,7 @@ function RootNavigator() {
  */
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
-function BottomTabNavigator() {
+function BottomTabNavigator({ navigation }: any) {
   const colorScheme = useColorScheme();
 
   return (
@@ -119,42 +119,86 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="SuperLikeList"
         component={SuperLikeListScreen}
-        options={{
+        options={({ navigation }: any) => ({
           title: "Všečkana imena",
           headerLeft: () => null,
+          headerRight: () => (
+            <AntDesign
+              name="logout"
+              size={24}
+              color="white"
+              onPress={() => {
+                AsyncStorage.removeItem("token");
+                navigation.navigate("SignIn");
+              }}
+            />
+          ),
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="thumbs-up" color={color} />
           ),
-        }}
+        })}
       />
       <BottomTab.Screen
         name="Home"
         component={HomeScreen}
-        options={{
+        options={({ navigation }: any) => ({
           title: "Všečkaj imena",
           headerLeft: () => null,
+          headerRight: () => (
+            <AntDesign
+              name="logout"
+              size={24}
+              color="white"
+              onPress={() => {
+                AsyncStorage.removeItem("token");
+                navigation.navigate("SignIn");
+              }}
+            />
+          ),
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-        }}
+        })}
       />
       <BottomTab.Screen
         name="Preferences"
         component={PreferencesScreen}
-        options={{
+        options={({ navigation }: any) => ({
           title: "Preference",
           headerLeft: () => null,
+          headerRight: () => (
+            <AntDesign
+              name="logout"
+              size={24}
+              color="white"
+              onPress={() => {
+                AsyncStorage.removeItem("token");
+                navigation.navigate("SignIn");
+              }}
+            />
+          ),
           tabBarIcon: ({ color }) => <TabBarIcon name="gear" color={color} />,
-        }}
+        })}
       />
       <BottomTab.Screen
         name="Statistics"
         component={NamesByYearScreen}
-        options={{
+        options={({ navigation }: any) => ({
           title: "Statistika",
           headerLeft: () => null,
+          headerRight: () => (
+            <AntDesign
+              name="logout"
+              size={24}
+              color="white"
+              onPress={() => {
+                AsyncStorage.removeItem("token");
+                navigation.navigate("SignIn");
+              }}
+            />
+          ),
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="list-ol" color={color} />
           ),
-        }}
+        })}
       />
     </BottomTab.Navigator>
   );
