@@ -2,7 +2,7 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 
-export function SwiperCard({ babyName }) {
+export function SwiperCard({ babyName }: any) {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.text}>{babyName}</Text>
