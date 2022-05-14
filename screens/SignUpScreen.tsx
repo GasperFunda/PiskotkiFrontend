@@ -29,7 +29,6 @@ export default function SignUpScreen({ navigation }: any) {
       () => {
         setSnackbarVisible(true);
         setSnackbarMessage("Registracija uspešna!");
-
         setTimeout(() => {
           navigation.navigate("SignIn");
         }, 2000);
@@ -44,8 +43,6 @@ export default function SignUpScreen({ navigation }: any) {
     <>
       <Formik
         initialValues={{
-          fatherName: "",
-          motherName: "",
           email: "",
           password: "",
           repeatPassword: "",
@@ -68,24 +65,7 @@ export default function SignUpScreen({ navigation }: any) {
                 placeholder="Email"
                 leading={(props) => <Icon name="account" {...props} />}
               ></TextInput>
-              <TextInput
-                onChangeText={handleChange("fatherName")}
-                onBlur={handleBlur("fatherName")}
-                value={values.fatherName}
-                style={styles.formItem}
-                placeholder="Father's name"
-                leading={() => <AntDesign name="man" size={24} color="black" />}
-              ></TextInput>
-              <TextInput
-                onChangeText={handleChange("motherName")}
-                onBlur={handleBlur("motherName")}
-                value={values.motherName}
-                style={styles.formItem}
-                placeholder="Mother's name"
-                leading={() => (
-                  <AntDesign name="woman" size={24} color="black" />
-                )}
-              ></TextInput>
+
               <TextInput
                 onChangeText={handleChange("password")}
                 onBlur={handleBlur("password")}
