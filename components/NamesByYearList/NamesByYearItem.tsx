@@ -6,10 +6,12 @@ import Navigation from "../../navigation";
 
 export interface INamesByYearItemProps {
   year: number;
-  navigation: any;
 }
 
-export default function NamesByYearItem(props: INamesByYearItemProps) {
+export default function NamesByYearItem(
+  props: INamesByYearItemProps,
+  { navigation }: any
+) {
   return (
     <Card
       style={{ margin: 5 }}
