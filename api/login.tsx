@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { SignInFormData } from "../types/auth";
-
+import { REACT_APP_BASE_API_URL } from "@env";
 export function login(
   link: string,
   data: SignInFormData,
@@ -8,7 +8,12 @@ export function login(
   errorCallback: (error: AxiosError) => void
 ): void {
   axios
-    .post(`${process.env.REACT_APP_API_BASE_URL + "/" + link}`, data)
+    .post(`${REACT_APP_BASE_API_URL + "/" + link}`, data, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
     .then((res) => successCallback(res))
     .catch((err) => errorCallback(err));
 }

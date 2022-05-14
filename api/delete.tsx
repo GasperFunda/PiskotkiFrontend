@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { REACT_APP_BASE_API_URL } from "@env";
 
 export function remove(
   link: string,
@@ -6,7 +7,7 @@ export function remove(
   errorCallback: (error: AxiosError) => void
 ): void {
   axios
-    .delete(`${process.env.REACT_APP_API_BASE_URL + "/" + link}`, {
+    .delete(`${REACT_APP_BASE_API_URL + "/" + link}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
       },

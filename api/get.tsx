@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { REACT_APP_BASE_API_URL } from "@env";
 
 export function get(
   link: string,
@@ -6,11 +7,7 @@ export function get(
   errorCallback: (error: AxiosError) => void
 ): void {
   axios
-    .get(`${process.env.REACT_APP_API_BASE_URL + "/" + link}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
-      },
-    })
+    .get(`${REACT_APP_BASE_API_URL + "/" + link}`, {})
     .then((res) => successCallback(res))
     .catch((err) => errorCallback(err));
 }

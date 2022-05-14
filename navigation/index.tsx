@@ -31,6 +31,7 @@ import {
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import HomeScreen from "../screens/HomeScreen";
+import { NamesByYearScreen } from "../screens/NamesByYearScreen";
 
 export default function Navigation({
   colorScheme,
@@ -57,19 +58,9 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Root"
-        component={BottomTabNavigator}
-        options={{ title: "Baby generator" }}
-      />
-      <Stack.Screen
-        name="Preferences"
-        component={PreferencesScreen}
-        options={{ title: "Preferences" }}
-      />
-      <Stack.Screen
-        name="SuperLikeList"
-        component={SuperLikeListScreen}
-        options={{ title: "Seznam všečkanih imen" }}
+        name="SignIn"
+        component={SignInScreen}
+        options={{ title: "Prijava" }}
       />
       <Stack.Screen
         name="SignUp"
@@ -77,9 +68,9 @@ function RootNavigator() {
         options={{ title: "Registracija" }}
       />
       <Stack.Screen
-        name="SignIn"
-        component={SignInScreen}
-        options={{ title: "Prijava" }}
+        name="Root"
+        component={BottomTabNavigator}
+        options={{ title: "Baby generator" }}
       />
       <Stack.Screen
         name="NotFound"
@@ -133,6 +124,16 @@ function BottomTabNavigator() {
         options={{
           title: "Preference",
           tabBarIcon: ({ color }) => <TabBarIcon name="gear" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Statistics"
+        component={NamesByYearScreen}
+        options={{
+          title: "Statistika",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="list-ol" color={color} />
+          ),
         }}
       />
     </BottomTab.Navigator>

@@ -33,6 +33,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 export type RootTabParamList = {
   SuperLikeList: undefined;
   Preferences: undefined;
+  Statistics: undefined;
   Home: undefined;
 };
 
