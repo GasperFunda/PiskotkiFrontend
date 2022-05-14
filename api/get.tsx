@@ -1,4 +1,3 @@
-import { message } from "antd";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 export function get(
@@ -30,8 +29,4 @@ export function getDownload(
     })
     .then((res) => successCallback(res))
     .catch((err) => errorCallback(err));
-}
-
-export function getErrorCallback(err: AxiosError): void {
-  message.error("Error when fetching data: " + err.response?.statusText);
 }

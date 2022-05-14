@@ -8,9 +8,7 @@ export interface IAppButtonProps {
 }
 
 export default function AppButton({ onPress, title }: IAppButtonProps) {
-  return (
-    <Button style={styles.button} onPressOut={() => onPress} title={title} />
-  );
+  return <Button style={styles.button} onPress={onPress} title={title} />;
 }
 
 const styles = StyleSheet.create({
