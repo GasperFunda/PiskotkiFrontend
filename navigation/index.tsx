@@ -18,6 +18,7 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
+import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
@@ -53,15 +54,20 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Root"
+        name="SignUp"
         component={SignUpScreen}
         options={{ title: "Sign up" }}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{ title: "Sign in" }}
+      />
+      <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
         options={{ headerShown: false }}
-      /> */}
+      />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
