@@ -1,19 +1,16 @@
 import * as React from "react";
 import { Text, useColorScheme } from "react-native";
 
-export interface IHeadingProps {
+export interface IAppTextProps {
   children: string;
 }
 
-export function Heading(props: IHeadingProps) {
+export default function AppText(props: IAppTextProps) {
   const colorScheme = useColorScheme();
   return (
     <Text
       style={{
-        fontSize: 24,
-        fontWeight: "bold",
         color: colorScheme === "dark" ? "white" : "black",
-        textAlign: "center",
       }}
     >
       {props.children}
