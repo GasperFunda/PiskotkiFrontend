@@ -9,15 +9,27 @@ import AppButton from "../components/AppButton";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { AntDesign } from "@expo/vector-icons";
 import { login } from "../api/login";
-import { REACT_APP_BASE_API_URL } from "@env";
+import { get } from "../api/get";
+
 export default function SignUpScreen({ navigation }: any) {
   const handleSubmit = React.useCallback((formValues: SignUpFormData) => {
     const { email, password } = formValues;
+    const object = { email: email, password: password };
     login(
-      `${REACT_APP_BASE_API_URL}/signup`,
-      { email, password },
+      `signup`,
+      object,
       (res) => {
-        console.log(res);
+        console.log(res.data);
+      },
+      (err) => {
+        console.log(err.response?.data);
+      }
+    );
+
+    get(
+      "getRandomName",
+      (res) => {
+        console.log(res.data);
       },
       (err) => {
         console.log(err);

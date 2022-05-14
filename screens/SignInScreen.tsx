@@ -8,15 +8,26 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Button, TextInput, Text } from "@react-native-material/core";
-import { SignUpFormData } from "../types/auth";
+import { SignInFormData } from "../types/auth";
 import AppHeading from "../components/AppHeading";
 import AppButton from "../components/AppButton";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { AntDesign } from "@expo/vector-icons";
+import { login } from "../api/login";
 
 export default function SignInScreen({ navigation }: any) {
-  const handleSubmit = React.useCallback((formValues: SignUpFormData) => {
-    console.log(formValues);
+  const handleSubmit = React.useCallback((formValues: SignInFormData) => {
+    const { email, password } = formValues;
+    login(
+      `signin`,
+      { email: email, password: password },
+      (res) => {
+        navigation.navigate("Home");
+      },
+      (err) => {
+        console.log(err.response?.data);
+      }
+    );
   }, []);
 
   return (

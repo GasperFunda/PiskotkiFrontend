@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-
+import { REACT_APP_BASE_API_URL } from "@env";
 export function update<Type>(
   link: string,
   data: Type,
@@ -7,7 +7,7 @@ export function update<Type>(
   errorCallback: (error: AxiosError) => void
 ): void {
   axios
-    .put(`${process.env.REACT_APP_API_BASE_URL + "/" + link}`, data, {
+    .put(`${REACT_APP_BASE_API_URL + "/" + link}`, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
       },
