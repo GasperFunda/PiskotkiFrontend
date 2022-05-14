@@ -18,6 +18,7 @@ declare global {
 
 export type RootStackParamList = {
   Preferences: undefined;
+  SuperLikeList: undefined;
   SignIn: undefined;
   SignUp: undefined;
   Root: NavigatorScreenParams<RootTabParamList> | undefined;

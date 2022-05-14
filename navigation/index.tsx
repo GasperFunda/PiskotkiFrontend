@@ -21,6 +21,7 @@ import NotFoundScreen from "../screens/NotFoundScreen";
 import PreferencesScreen from "../screens/PreferencesScreen";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
+import { SuperLikeListScreen } from "../screens/SuperLikeListScreen";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import Home from "../screens/Home";
@@ -63,14 +64,19 @@ function RootNavigator() {
         options={{ title: "Preferences" }}
       />
       <Stack.Screen
+        name="SuperLikeList"
+        component={SuperLikeListScreen}
+        options={{ title: "Seznam všečkanih imen" }}
+      />
+      <Stack.Screen
         name="SignUp"
         component={SignUpScreen}
-        options={{ title: "Sign up" }}
+        options={{ title: "Registracija" }}
       />
       <Stack.Screen
         name="SignIn"
         component={SignInScreen}
-        options={{ title: "Sign in" }}
+        options={{ title: "Prijava" }}
       />
       <Stack.Screen
         name="Root"
