@@ -1,6 +1,5 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
-import { Text, View } from "../components/Themed";
+import { StyleSheet, Text, View } from "react-native";
 
 export function SwiperCard({ babyName }: any) {
 	return (
@@ -13,7 +12,18 @@ export function SwiperCard({ babyName }: any) {
 
 const styles = StyleSheet.create({
 	container: {
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 5,
+		},
+		shadowOpacity: 0.34,
+		shadowRadius: 6.27,
+
+		elevation: 10,
+		height: "65%",
 		backgroundColor: "white",
+		margin: 30,
 	},
 	text: {
 		color: "black",

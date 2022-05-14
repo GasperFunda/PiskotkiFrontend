@@ -6,9 +6,9 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
+	NavigationContainer,
+	DefaultTheme,
+	DarkTheme,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
@@ -25,27 +25,27 @@ import { SuperLikeListScreen } from "../screens/SuperLikeListScreen";
 import Home from "../screens/HomeScreen";
 
 import {
-  RootStackParamList,
-  RootTabParamList,
-  RootTabScreenProps,
+	RootStackParamList,
+	RootTabParamList,
+	RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import HomeScreen from "../screens/HomeScreen";
 import { NamesByYearScreen } from "../screens/NamesByYearScreen";
 
 export default function Navigation({
-  colorScheme,
+	colorScheme,
 }: {
-  colorScheme: ColorSchemeName;
+	colorScheme: ColorSchemeName;
 }) {
-  return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-    >
-      <RootNavigator />
-    </NavigationContainer>
-  );
+	return (
+		<NavigationContainer
+			linking={LinkingConfiguration}
+			theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+		>
+			<RootNavigator />
+		</NavigationContainer>
+	);
 }
 
 /**
@@ -55,33 +55,38 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="SignIn"
-        component={SignInScreen}
-        options={{ title: "Prijava" }}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUpScreen}
-        options={{ title: "Registracija" }}
-      />
-      <Stack.Screen
-        name="Root"
-        component={BottomTabNavigator}
-        options={{ title: "Baby generator" }}
-      />
-      <Stack.Screen
-        name="NotFound"
-        component={NotFoundScreen}
-        options={{ title: "Oops!" }}
-      />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator>
+			<Stack.Screen
+				name="Home"
+				component={HomeScreen}
+				options={{ title: "Home screen" }}
+			/>
+			<Stack.Screen
+				name="SignIn"
+				component={SignInScreen}
+				options={{ title: "Prijava" }}
+			/>
+			<Stack.Screen
+				name="SignUp"
+				component={SignUpScreen}
+				options={{ title: "Registracija" }}
+			/>
+			<Stack.Screen
+				name="Root"
+				component={BottomTabNavigator}
+				options={{ title: "Baby generator" }}
+			/>
+			<Stack.Screen
+				name="NotFound"
+				component={NotFoundScreen}
+				options={{ title: "Oops!" }}
+			/>
+			<Stack.Group screenOptions={{ presentation: "modal" }}>
+				<Stack.Screen name="Modal" component={ModalScreen} />
+			</Stack.Group>
+		</Stack.Navigator>
+	);
 }
 
 /**
@@ -91,61 +96,67 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
+	const colorScheme = useColorScheme();
 
-  return (
-    <BottomTab.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-      }}
-    >
-      <BottomTab.Screen
-        name="SuperLikeList"
-        component={SuperLikeListScreen}
-        options={({ navigation }: RootTabScreenProps<"SuperLikeList">) => ({
-          title: "Všečkana imena",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="thumbs-up" color={color} />
-          ),
-        })}
-      />
-      <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          title: "Všečkaj imena",
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Preferences"
-        component={PreferencesScreen}
-        options={{
-          title: "Preference",
-          tabBarIcon: ({ color }) => <TabBarIcon name="gear" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Statistics"
-        component={NamesByYearScreen}
-        options={{
-          title: "Statistika",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="list-ol" color={color} />
-          ),
-        }}
-      />
-    </BottomTab.Navigator>
-  );
+	return (
+		<BottomTab.Navigator
+			initialRouteName="Home"
+			screenOptions={{
+				tabBarActiveTintColor: Colors[colorScheme].tint,
+			}}
+		>
+			<BottomTab.Screen
+				name="SuperLikeList"
+				component={SuperLikeListScreen}
+				options={({
+					navigation,
+				}: RootTabScreenProps<"SuperLikeList">) => ({
+					title: "Všečkana imena",
+					tabBarIcon: ({ color }) => (
+						<TabBarIcon name="thumbs-up" color={color} />
+					),
+				})}
+			/>
+			<BottomTab.Screen
+				name="Home"
+				component={HomeScreen}
+				options={{
+					title: "Všečkaj imena",
+					tabBarIcon: ({ color }) => (
+						<TabBarIcon name="home" color={color} />
+					),
+				}}
+			/>
+			<BottomTab.Screen
+				name="Preferences"
+				component={PreferencesScreen}
+				options={{
+					title: "Preference",
+					tabBarIcon: ({ color }) => (
+						<TabBarIcon name="gear" color={color} />
+					),
+				}}
+			/>
+			<BottomTab.Screen
+				name="Statistics"
+				component={NamesByYearScreen}
+				options={{
+					title: "Statistika",
+					tabBarIcon: ({ color }) => (
+						<TabBarIcon name="list-ol" color={color} />
+					),
+				}}
+			/>
+		</BottomTab.Navigator>
+	);
 }
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
-  color: string;
+	name: React.ComponentProps<typeof FontAwesome>["name"];
+	color: string;
 }) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+	return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }
