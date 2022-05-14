@@ -22,9 +22,7 @@ import PreferencesScreen from "../screens/PreferencesScreen";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import { SuperLikeListScreen } from "../screens/SuperLikeListScreen";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
-import Home from "../screens/Home";
+import Home from "../screens/HomeScreen";
 
 import {
   RootStackParamList,
@@ -32,6 +30,7 @@ import {
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import HomeScreen from "../screens/HomeScreen";
 
 export default function Navigation({
   colorScheme,
@@ -57,7 +56,11 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} options={{ title: "Home" }} />
+      <Stack.Screen
+        name="Root"
+        component={BottomTabNavigator}
+        options={{ title: "Baby generator" }}
+      />
       <Stack.Screen
         name="Preferences"
         component={PreferencesScreen}
@@ -77,11 +80,6 @@ function RootNavigator() {
         name="SignIn"
         component={SignInScreen}
         options={{ title: "Prijava" }}
-      />
-      <Stack.Screen
-        name="Root"
-        component={BottomTabNavigator}
-        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="NotFound"
@@ -106,48 +104,35 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
+        name="SuperLikeList"
+        component={SuperLikeListScreen}
+        options={({ navigation }: RootTabScreenProps<"SuperLikeList">) => ({
+          title: "Všečkana imena",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="thumbs-up" color={color} />
           ),
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Home"
+        component={HomeScreen}
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Všečkaj imena",
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="Home"
-        component={Home}
+        name="Preferences"
+        component={PreferencesScreen}
         options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Preference",
+          tabBarIcon: ({ color }) => <TabBarIcon name="gear" color={color} />,
         }}
       />
     </BottomTab.Navigator>
