@@ -14,6 +14,7 @@ import AppButton from "../components/AppButton";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { AntDesign } from "@expo/vector-icons";
 import { login } from "../api/login";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SignInScreen({ navigation }: any) {
   const handleSubmit = React.useCallback((formValues: SignInFormData) => {
@@ -22,10 +23,11 @@ export default function SignInScreen({ navigation }: any) {
       `signin`,
       { email: email, password: password },
       (res) => {
-        navigation.navigate("Home");
+        AsyncStorage.setItem("token", res.data.token);
+        navigation.navigate("Root");
       },
       (err) => {
-        console.log(err.response?.data);
+        console.log(err);
       }
     );
   }, []);
@@ -66,7 +68,7 @@ export default function SignInScreen({ navigation }: any) {
               placeholder="Password"
               leading={() => <AntDesign name="lock1" size={24} color="black" />}
             ></TextInput>
-            <AppButton onPress={() => handleSubmit} title="Login" />
+            <AppButton onPress={handleSubmit} title="Login" />
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate("SignUp");

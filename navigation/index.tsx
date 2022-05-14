@@ -32,6 +32,7 @@ import {
 import LinkingConfiguration from "./LinkingConfiguration";
 import HomeScreen from "../screens/HomeScreen";
 import { NamesByYearScreen } from "../screens/NamesByYearScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Navigation({
 	colorScheme,
@@ -55,23 +56,38 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+	const [user, setUser] = React.useState(false);
+	React.useEffect(() => {
+		const checkUser = async () => {
+			const user = await AsyncStorage.getItem("token");
+			if (user) setUser(true);
+			else {
+				setUser(false);
+			}
+		};
+		checkUser();
+	}, []);
 	return (
 		<Stack.Navigator>
-			<Stack.Screen
-				name="Home"
-				component={HomeScreen}
-				options={{ title: "Home screen" }}
-			/>
-			<Stack.Screen
-				name="SignIn"
-				component={SignInScreen}
-				options={{ title: "Prijava" }}
-			/>
-			<Stack.Screen
-				name="SignUp"
-				component={SignUpScreen}
-				options={{ title: "Registracija" }}
-			/>
+			{user && (
+				<>
+					<Stack.Screen
+						name="Home"
+						component={HomeScreen}
+						options={{ title: "Home" }}
+					/>
+					<Stack.Screen
+						name="SignIn"
+						component={SignInScreen}
+						options={{ title: "Prijava" }}
+					/>
+					<Stack.Screen
+						name="SignUp"
+						component={SignUpScreen}
+						options={{ title: "Registracija" }}
+					/>
+				</>
+			)}
 			<Stack.Screen
 				name="Root"
 				component={BottomTabNavigator}
@@ -108,20 +124,20 @@ function BottomTabNavigator() {
 			<BottomTab.Screen
 				name="SuperLikeList"
 				component={SuperLikeListScreen}
-				options={({
-					navigation,
-				}: RootTabScreenProps<"SuperLikeList">) => ({
+				options={{
 					title: "Všečkana imena",
+					headerLeft: () => null,
 					tabBarIcon: ({ color }) => (
 						<TabBarIcon name="thumbs-up" color={color} />
 					),
-				})}
+				}}
 			/>
 			<BottomTab.Screen
 				name="Home"
 				component={HomeScreen}
 				options={{
 					title: "Všečkaj imena",
+					headerLeft: () => null,
 					tabBarIcon: ({ color }) => (
 						<TabBarIcon name="home" color={color} />
 					),
@@ -132,6 +148,7 @@ function BottomTabNavigator() {
 				component={PreferencesScreen}
 				options={{
 					title: "Preference",
+					headerLeft: () => null,
 					tabBarIcon: ({ color }) => (
 						<TabBarIcon name="gear" color={color} />
 					),
@@ -142,6 +159,7 @@ function BottomTabNavigator() {
 				component={NamesByYearScreen}
 				options={{
 					title: "Statistika",
+					headerLeft: () => null,
 					tabBarIcon: ({ color }) => (
 						<TabBarIcon name="list-ol" color={color} />
 					),
