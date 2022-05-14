@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import { Button, TextInput, Text } from "@react-native-material/core";
 import { SignUpFormData } from "../types/auth";
-import { Heading } from "../components/Heading";
-import { AppButton } from "../components/AppButton";
+import AppHeading from "../components/AppHeading";
+import AppButton from "../components/AppButton";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -33,7 +33,9 @@ export default function SignInScreen({ navigation }: any) {
       {({ handleChange, handleBlur, handleSubmit, values }) => (
         <>
           <Flex justify="center" items="center" style={{ padding: 25 }}>
-            <Heading>Sign in to your baby names generator account!</Heading>
+            <AppHeading fontSize={24}>
+              Sign in to your baby names generator account!
+            </AppHeading>
           </Flex>
           <Flex justify="center" items="center">
             <TextInput

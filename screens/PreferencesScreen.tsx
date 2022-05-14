@@ -9,10 +9,9 @@ import {
 } from "react-native";
 import { Button, TextInput, Text } from "@react-native-material/core";
 import { SignUpFormData } from "../types/auth";
-import { Heading } from "../components/Heading";
-import { AppButton } from "../components/AppButton";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AppHeading from "../components/AppHeading";
+import AppButton from "../components/AppButton";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { Checkbox, RadioButton } from "react-native-paper";
 import AppLabel from "../components/AppLabel";
 
@@ -27,24 +26,25 @@ export default function PreferencesScreen({ navigation }: any) {
     "traditional",
     "modern",
   ] as string[]);
-  const handleSubmit = React.useCallback((formValues) => {}, []);
+
+  const handleSubmit = React.useCallback((formValues) => {
+    console.log(formValues);
+  }, []);
 
   return (
     <Formik
       initialValues={{
         initialLetter: "",
-        length: 3,
-        gender: false,
-        traditional: true,
-        modern: true,
-        kidNames: [] as string[],
+        otherKidsNames: "",
       }}
       onSubmit={(values) => handleSubmit(values)}
     >
       {({ handleChange, handleBlur, handleSubmit, values }) => (
         <>
           <Flex justify="center" items="center" style={{ padding: 25 }}>
-            <Heading>Choose your baby name making preferences</Heading>
+            <AppHeading fontSize={24}>
+              Izberite preference glede generiranja imen
+            </AppHeading>
           </Flex>
           <Flex justify="center" items="center">
             <TextInput
@@ -62,8 +62,9 @@ export default function PreferencesScreen({ navigation }: any) {
                 />
               )}
             ></TextInput>
+            <AppHeading fontSize={20}>Dolžina imena</AppHeading>
             <Flex direction="row" justify="center">
-              <AppLabel>Short:</AppLabel>
+              <AppLabel>Kratko:</AppLabel>
               <Checkbox
                 color="green"
                 uncheckedColor="green"
@@ -78,7 +79,7 @@ export default function PreferencesScreen({ navigation }: any) {
                   }
                 }}
               />
-              <AppLabel>Medium:</AppLabel>
+              <AppLabel>Srednje:</AppLabel>
               <Checkbox
                 color="green"
                 uncheckedColor="green"
@@ -93,7 +94,7 @@ export default function PreferencesScreen({ navigation }: any) {
                   }
                 }}
               />
-              <AppLabel>Long:</AppLabel>
+              <AppLabel>Dolgo:</AppLabel>
               <Checkbox
                 color="green"
                 uncheckedColor="green"
@@ -107,8 +108,10 @@ export default function PreferencesScreen({ navigation }: any) {
                 }}
               />
             </Flex>
+            <AppHeading fontSize={20}>Spol</AppHeading>
+
             <Flex direction="row" justify="center">
-              <AppLabel>Male:</AppLabel>
+              <AppLabel>Moški:</AppLabel>
               <RadioButton
                 color="green"
                 uncheckedColor="green"
@@ -116,7 +119,7 @@ export default function PreferencesScreen({ navigation }: any) {
                 status={gender ? "checked" : "unchecked"}
                 onPress={() => setGender(true)}
               />
-              <AppLabel>Female:</AppLabel>
+              <AppLabel>Ženski:</AppLabel>
 
               <RadioButton
                 color="green"
@@ -126,8 +129,10 @@ export default function PreferencesScreen({ navigation }: any) {
                 onPress={() => setGender(false)}
               />
             </Flex>
-            <Flex direction="row" justify="center" style={{ marginBottom: 40 }}>
-              <AppLabel>Traditional:</AppLabel>
+            <AppHeading fontSize={20}>Stil imena</AppHeading>
+
+            <Flex direction="row" justify="center">
+              <AppLabel>Tradicionalno:</AppLabel>
               <Checkbox
                 color="green"
                 uncheckedColor="green"
@@ -144,7 +149,7 @@ export default function PreferencesScreen({ navigation }: any) {
                   }
                 }}
               />
-              <AppLabel>Modern:</AppLabel>
+              <AppLabel>Moderno:</AppLabel>
               <Checkbox
                 color="green"
                 uncheckedColor="green"
@@ -158,7 +163,22 @@ export default function PreferencesScreen({ navigation }: any) {
                 }}
               />
             </Flex>
-            <AppButton onPress={() => handleSubmit} title="Save preferences" />
+            <TextInput
+              onChangeText={handleChange("otherKidsNames")}
+              onBlur={handleBlur("otherKidsNames")}
+              value={values.otherKidsNames}
+              style={styles.formItem}
+              placeholder="Imena ostalih otrok (ločite z vejico)"
+              leading={(props) => (
+                <MaterialIcons name="child-care" size={24} color="black" />
+              )}
+            ></TextInput>
+            <View style={{ marginTop: 40 }}>
+              <AppButton
+                onPress={() => handleSubmit}
+                title="Shrani preference"
+              />
+            </View>
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate("SignUp");
