@@ -18,6 +18,7 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
+import PreferencesScreen from "../screens/PreferencesScreen";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import TabOneScreen from "../screens/TabOneScreen";
@@ -53,6 +54,11 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Preferences"
+        component={PreferencesScreen}
+        options={{ title: "Preferences" }}
+      />
       <Stack.Screen
         name="SignUp"
         component={SignUpScreen}
