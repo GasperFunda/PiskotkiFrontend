@@ -1,15 +1,18 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { REACT_APP_BASE_API_URL } from "@env";
-export function create<Type>(
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+export async function create<Type>(
   link: string,
   data: Type,
   successCallback: (res: AxiosResponse) => void,
   errorCallback: (error: AxiosError) => void
-): void {
+): Promise<void> {
+  const token = await AsyncStorage.getItem("token");
   axios
     .post(`${REACT_APP_BASE_API_URL + "/" + link}`, data, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+        Authorization: `Bearer ${token}`,
       },
     })
     .then((res) => {

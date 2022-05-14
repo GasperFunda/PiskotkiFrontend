@@ -2,15 +2,18 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { REACT_APP_BASE_API_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export function get(
+export async function get(
   link: string,
   successCallback: (res: AxiosResponse) => void,
   errorCallback: (error: AxiosError) => void
-): void {
+): Promise<void> {
+  const token = await AsyncStorage.getItem("token");
+  console.log(token);
+
   axios
     .get(`${REACT_APP_BASE_API_URL + "/" + link}`, {
       headers: {
-        Authorization: `Bearer ${AsyncStorage.getItem("token")}`,
+        Authorization: `Bearer ${token}`,
       },
     })
     .then((res) => successCallback(res))

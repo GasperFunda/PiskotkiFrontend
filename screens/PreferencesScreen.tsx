@@ -26,13 +26,19 @@ export default function PreferencesScreen({ navigation }: any) {
     "traditional",
     "modern",
   ] as string[]);
-
+  const [initialLetter, setInitialLetter] = React.useState("");
+  const [endingLetter, setEndingLetter] = React.useState("");
+  const [motherName, setMotherName] = React.useState("");
+  const [fatherName, setFatherName] = React.useState("");
+  const [otherKidsNames, setOtherKidsNames] = React.useState("");
   React.useEffect(() => {
     get(
       "settings",
-      (res) => {},
+      (res) => {
+        console.log(res.data);
+      },
       (err) => {
-        console.log(err);
+        console.log(err.response?.data);
       }
     );
   }, []);
@@ -45,7 +51,7 @@ export default function PreferencesScreen({ navigation }: any) {
       first_character: formValues.initialLetter,
       last_character: formValues.endingLetter,
       gender: gender,
-      style_traditional: nameStyle.includes("traditional"),
+      style_classic: nameStyle.includes("traditional"),
       style_modern: nameStyle.includes("modern"),
       sibling_names: formValues.otherKidsNames,
       name_father: formValues.fatherName,
@@ -60,7 +66,7 @@ export default function PreferencesScreen({ navigation }: any) {
         console.log(res.data);
       },
       (err) => {
-        console.log(err);
+        console.log(err.response?.data);
       }
     );
   }, []);
@@ -68,12 +74,13 @@ export default function PreferencesScreen({ navigation }: any) {
   return (
     <ScrollView>
       <Formik
+        enableReinitialize={true}
         initialValues={{
-          initialLetter: "",
-          endingLetter: "",
-          otherKidsNames: "",
-          motherName: "",
-          fatherName: "",
+          initialLetter: initialLetter,
+          endingLetter: endingLetter,
+          otherKidsNames: otherKidsNames,
+          motherName: motherName,
+          fatherName: fatherName,
         }}
         onSubmit={(values) => handleSubmit(values)}
       >
