@@ -1,15 +1,14 @@
 import * as React from "react";
-import { Flex, Spacer } from "react-native-flex-layout";
+import { Flex } from "react-native-flex-layout";
 import { Formik } from "formik";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Button, TextInput, Text } from "@react-native-material/core";
+import { TextInput, Text } from "@react-native-material/core";
 import { SignUpFormData } from "../types/auth";
 import AppHeading from "../components/AppHeading";
 import AppButton from "../components/AppButton";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { AntDesign } from "@expo/vector-icons";
 import { login } from "../api/login";
-import { get } from "../api/get";
 import { Snackbar } from "react-native-paper";
 
 export default function SignUpScreen({ navigation }: any) {
@@ -53,7 +52,8 @@ export default function SignUpScreen({ navigation }: any) {
           <>
             <Flex justify="center" items="center" style={{ padding: 25 }}>
               <AppHeading fontSize={24}>
-                Sign Up to generate personalized baby names!
+                Registrirajte, da lahko začnete uporabljati aplikacijo za
+                personalizirano generiranje imen
               </AppHeading>
             </Flex>
             <Flex justify="center" items="center">
@@ -72,7 +72,7 @@ export default function SignUpScreen({ navigation }: any) {
                 value={values.password}
                 secureTextEntry={true}
                 style={styles.formItem}
-                placeholder="Password"
+                placeholder="Geslo"
                 leading={() => (
                   <AntDesign name="lock1" size={24} color="black" />
                 )}
@@ -83,7 +83,7 @@ export default function SignUpScreen({ navigation }: any) {
                 value={values.repeatPassword}
                 secureTextEntry={true}
                 style={styles.formItem}
-                placeholder="Repeat password"
+                placeholder="Ponovite geslo"
                 leading={() => (
                   <AntDesign name="lock1" size={24} color="black" />
                 )}
@@ -101,7 +101,7 @@ export default function SignUpScreen({ navigation }: any) {
                     textDecorationLine: "underline",
                   }}
                 >
-                  Already have an account? Sign in
+                  Že imate račun? Prijavite se!
                 </Text>
               </TouchableOpacity>
             </Flex>

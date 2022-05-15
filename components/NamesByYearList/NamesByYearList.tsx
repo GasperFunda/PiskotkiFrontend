@@ -5,6 +5,7 @@ import NamesByYearItem from "./NamesByYearItem";
 export interface INamesByYearListProps {}
 
 export default function NamesByYearList(props: INamesByYearListProps) {
+  React.useEffect(() => {}, []);
   return (
     <ScrollView>
       <NamesByYearItem year={2022}></NamesByYearItem>

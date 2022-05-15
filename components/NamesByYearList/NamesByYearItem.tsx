@@ -15,7 +15,9 @@ export default function NamesByYearItem(
   return (
     <Card
       style={{ margin: 5 }}
-      onPress={() => props.navigation.navigate("NamesByYearDetailsItem")}
+      onPress={() =>
+        navigation.navigate("NamesByYearDetailsItem", { year: props.year })
+      }
     >
       <Card.Title title={props.year}></Card.Title>
     </Card>
