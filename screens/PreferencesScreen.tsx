@@ -21,6 +21,7 @@ export default function PreferencesScreen({ navigation }: any) {
 		"medium",
 		"long",
 	] as string[]);
+	const [checkedGender, setCheckedGender] = React.useState("male");
 	const [gender, setGender] = React.useState(true);
 	const [nameStyle, setNameStyle] = React.useState([
 		"traditional",
@@ -32,9 +33,17 @@ export default function PreferencesScreen({ navigation }: any) {
 	const [fatherName, setFatherName] = React.useState("");
 	const [otherKidsNames, setOtherKidsNames] = React.useState("");
 	const [snackbarVisible, setSnackbarVisible] = React.useState(false);
+
+	React.useEffect(() => {
+		console.log("Sprememba");
+		console.log(checkedGender);
+		setGender(checkedGender == "male");
+	}, [checkedGender]);
+
 	React.useEffect(() => {
 		get(
 			"settings",
+
 			(res) => {
 				const nameLength = [];
 				const nameStyle = [];
@@ -42,6 +51,7 @@ export default function PreferencesScreen({ navigation }: any) {
 				setEndingLetter(res.data.last_character);
 				setMotherName(res.data.name_mother);
 				setFatherName(res.data.name_father);
+				setCheckedGender(res.data.gender ? "male" : "female");
 				setOtherKidsNames(res.data.other_kids_names);
 				if (res.data.length_long) nameLength.push("long");
 				if (res.data.length_medium) nameLength.push("medium");
@@ -58,13 +68,17 @@ export default function PreferencesScreen({ navigation }: any) {
 	}, []);
 
 	const handleSubmit = React.useCallback((formValues) => {
+		console.log("----------------------");
+		console.log(checkedGender == "male");
+		console.log(checkedGender);
+		console.log(gender);
 		const requestData = {
 			length_short: nameLength.includes("short"),
 			length_medium: nameLength.includes("medium"),
 			length_long: nameLength.includes("long"),
 			first_character: formValues.initialLetter,
 			last_character: formValues.endingLetter,
-			gender: gender,
+			gender: checkedGender == "male",
 			style_classic: nameStyle.includes("traditional"),
 			style_modern: nameStyle.includes("modern"),
 			sibling_names: formValues.otherKidsNames,
@@ -223,17 +237,24 @@ export default function PreferencesScreen({ navigation }: any) {
 									color="green"
 									uncheckedColor="green"
 									value="male"
-									status={gender ? "checked" : "unchecked"}
-									onPress={() => setGender(true)}
+									status={
+										checkedGender == "male"
+											? "checked"
+											: "unchecked"
+									}
+									onPress={() => setCheckedGender("male")}
 								/>
 								<AppLabel>Ženski:</AppLabel>
-
 								<RadioButton
 									color="green"
 									uncheckedColor="green"
 									value="female"
-									status={!gender ? "checked" : "unchecked"}
-									onPress={() => setGender(false)}
+									status={
+										checkedGender == "female"
+											? "checked"
+											: "unchecked"
+									}
+									onPress={() => setCheckedGender("female")}
 								/>
 							</Flex>
 							<AppHeading fontSize={20}>Stil imena</AppHeading>
