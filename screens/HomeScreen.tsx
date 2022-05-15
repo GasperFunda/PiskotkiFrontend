@@ -25,6 +25,7 @@ export default function Home() {
 	useFocusEffect(
 		React.useCallback(() => {
 			random ? getNewRandomName() : suggestNewName();
+			swiperRef.current.swipeLeft();
 		}, [])
 	);
 
@@ -69,7 +70,7 @@ export default function Home() {
 
 	const dislikeName = () => {
 		setSwipedIndex(swipedIndex + 1);
-		if (allNames[swiped]) {
+		if (allNames[swiped].key != "") {
 			create(
 				"nameAction",
 				{ action: "dislike", name: allNames[swiped].key },
@@ -85,7 +86,7 @@ export default function Home() {
 	const likeName = () => {
 		setSwipedIndex(swipedIndex + 1);
 		//console.log(allNames);
-		if (allNames[swiped]) {
+		if (allNames[swiped].babyName != "") {
 			create(
 				"nameAction",
 				{
@@ -103,7 +104,7 @@ export default function Home() {
 
 	const superlikeName = () => {
 		setSwipedIndex(swipedIndex + 1);
-		if (allNames[swiped]) {
+		if (allNames[swiped].babyName != "") {
 			create(
 				"nameAction",
 				{ action: "superlike", name: allNames[swiped].key },
@@ -165,6 +166,16 @@ export default function Home() {
 			padding: 30,
 			paddingLeft: 35,
 		},
+		heart: {
+			backgroundColor: "#FCEF91",
+			justifyContent: "center",
+			alignContent: "center",
+			padding: 30,
+			paddingLeft: 35,
+		},
+		paddingManual: {
+			padding: 30,
+		},
 	});
 
 	return (
@@ -212,7 +223,7 @@ export default function Home() {
 				<View style={styles.buttonRounded}>
 					<AntDesign.Button
 						name="hearto"
-						style={styles.mainButtons}
+						style={styles.heart}
 						onPress={() => swiperRef.current.swipeTop()}
 						size={24}
 						color="white"
