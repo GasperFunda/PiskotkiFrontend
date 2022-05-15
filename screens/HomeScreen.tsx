@@ -8,6 +8,7 @@ import { SwiperCard } from "../components/SwiperCard";
 import { AntDesign } from "@expo/vector-icons";
 import { create } from "../api/create";
 import { get } from "../api/get";
+import { Checkbox, RadioButton, Snackbar } from "react-native-paper";
 
 export default function Home() {
 	const swiperRef = React.useRef(null);
@@ -135,6 +136,7 @@ export default function Home() {
 					stackSize={3}
 					onSwipedLeft={dislikeName}
 					onSwipedRight={likeName}
+					onSwipedTop={superlikeName}
 				></Swiper>
 			</View>
 			<View style={styles.buttonContainer}>
@@ -147,7 +149,12 @@ export default function Home() {
 					/>
 				</View>
 				<View>
-					<AntDesign.Button name="hearto" size={24} color="white" />
+					<AntDesign.Button
+						name="hearto"
+						onPress={() => swiperRef.current.swipeTop()}
+						size={24}
+						color="white"
+					/>
 				</View>
 				<View>
 					<AntDesign.Button
@@ -158,6 +165,7 @@ export default function Home() {
 					></AntDesign.Button>
 				</View>
 			</View>
+			<Checkbox color="green" uncheckedColor="green" />
 		</View>
 	);
 }
