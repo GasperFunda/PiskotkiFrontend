@@ -1,14 +1,21 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { Flex } from "@react-native-material/core";
 import * as React from "react";
-import { ScrollView, TouchableOpacity, View } from "react-native";
+import {
+  RefreshControl,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { get } from "../../api/get";
 import useColorScheme from "../../hooks/useColorScheme";
 import { SuperLikeItem } from "./SuperLikeItem";
 
-export interface ISuperLikeListProps {}
+export interface ISuperLikeListProps {
+  navigation: any;
+}
 
-export function SuperLikeList(props: ISuperLikeListProps) {
+export function SuperLikeList({ navigation }: any) {
   const [superLikedNames, setSuperLikedNames] = React.useState(
     [] as { id: string; childName: string }[]
   );
@@ -22,6 +29,7 @@ export function SuperLikeList(props: ISuperLikeListProps) {
     [] as { id: string; childName: string }[]
   );
   const [selectedItem, setSelectedItem] = React.useState(0);
+  const [refreshing, setRefreshing] = React.useState(false);
   const colorScheme = useColorScheme();
   React.useEffect(() => {
     get(
@@ -39,8 +47,6 @@ export function SuperLikeList(props: ISuperLikeListProps) {
             dislikedNames.push({ childName: item.name, id: item.id });
           }
         });
-        console.log(res.data);
-
         setDislikedNames(dislikedNames);
         setLikedNames(likedNames);
         setSuperLikedNames(superLikedNames);
@@ -55,8 +61,42 @@ export function SuperLikeList(props: ISuperLikeListProps) {
   const handleDeleteItem = (item: any) => {
     console.log(item);
   };
+
+  const handleRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    get(
+      "nameAction",
+      (res) => {
+        const dislikedNames: { id: string; childName: string }[] = [];
+        const likedNames: { id: string; childName: string }[] = [];
+        const superLikedNames: { id: string; childName: string }[] = [];
+        res.data.data.forEach((item: any) => {
+          if (item.action === "superlike") {
+            superLikedNames.push({ childName: item.name, id: item.id });
+          } else if (item.action === "like") {
+            likedNames.push({ childName: item.name, id: item.id });
+          } else {
+            dislikedNames.push({ childName: item.name, id: item.id });
+          }
+        });
+        setDislikedNames(dislikedNames);
+        setLikedNames(likedNames);
+        setSuperLikedNames(superLikedNames);
+        setDisplayedItems(superLikedNames);
+        setRefreshing(false);
+      },
+      (err) => {
+        console.log(err);
+        setRefreshing(false);
+      }
+    );
+  }, []);
   return (
-    <ScrollView>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+      }
+    >
       <Flex
         direction="row"
         justify="between"
