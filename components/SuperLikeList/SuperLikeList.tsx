@@ -199,7 +199,7 @@ export function SuperLikeList({ navigation }: any) {
         visible={snackbarVisible}
         duration={2000}
       >
-        Successfully saved user settings!
+        Uspešno ste izbrisali ime!
       </Snackbar>
     </ScrollView>
   );
