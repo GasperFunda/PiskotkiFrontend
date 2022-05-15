@@ -8,7 +8,6 @@ export async function get(
 	errorCallback: (error: AxiosError) => void
 ): Promise<void> {
 	const token = await AsyncStorage.getItem("token");
-	console.log(token);
 
 	axios
 		.get(`${REACT_APP_BASE_API_URL + "/" + link}`, {
