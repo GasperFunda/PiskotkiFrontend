@@ -61,17 +61,17 @@ export default function NamesByYearDetailsList({ route, navigation }: any) {
 
       {selectedItem === 0 ? (
         <>
-          <NamesByYearDetailsItem name={"Franc"} numberOfPeople={44326} />
-          <NamesByYearDetailsItem name={"Jožef"} numberOfPeople={32981} />
-          <NamesByYearDetailsItem name={"Janez"} numberOfPeople={29812} />
-          <NamesByYearDetailsItem name={"Marko"} numberOfPeople={23231} />
-          <NamesByYearDetailsItem name={"Andraž"} numberOfPeople={19212} />
+          <NamesByYearDetailsItem name={"Franc"} numberOfPeople={22093} />
+          <NamesByYearDetailsItem name={"Janez"} numberOfPeople={19958} />
+          <NamesByYearDetailsItem name={"Marko"} numberOfPeople={17286} />
+          <NamesByYearDetailsItem name={"Andrej"} numberOfPeople={16564} />
+          <NamesByYearDetailsItem name={"Jožef"} numberOfPeople={14127} />
         </>
       ) : (
         <>
-          <NamesByYearDetailsItem name={"Marija"} numberOfPeople={41051} />
-          <NamesByYearDetailsItem name={"Ana"} numberOfPeople={36901} />
+          <NamesByYearDetailsItem name={"Marija"} numberOfPeople={51751} />
           <NamesByYearDetailsItem name={"Nika"} numberOfPeople={32775} />
+          <NamesByYearDetailsItem name={"Ana"} numberOfPeople={24605} />
           <NamesByYearDetailsItem name={"Marjana"} numberOfPeople={23478} />
           <NamesByYearDetailsItem name={"Zofka"} numberOfPeople={20091} />
         </>
