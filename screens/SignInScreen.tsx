@@ -1,12 +1,7 @@
 import * as React from "react";
 import { Flex, Spacer } from "react-native-flex-layout";
 import { Formik } from "formik";
-import {
-  View,
-  StyleSheet,
-  useColorScheme,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Button, TextInput, Text } from "@react-native-material/core";
 import { SignInFormData } from "../types/auth";
 import AppHeading from "../components/AppHeading";
@@ -47,7 +42,7 @@ export default function SignInScreen({ navigation }: any) {
         <>
           <Flex justify="center" items="center" style={{ padding: 25 }}>
             <AppHeading fontSize={24}>
-              Sign in to your baby names generator account!
+              Prijavite se v aplikacijo za generiranje dojenčkovega imena!
             </AppHeading>
           </Flex>
           <Flex justify="center" items="center">
@@ -65,7 +60,7 @@ export default function SignInScreen({ navigation }: any) {
               value={values.password}
               secureTextEntry={true}
               style={styles.formItem}
-              placeholder="Password"
+              placeholder="Geslo"
               leading={() => <AntDesign name="lock1" size={24} color="black" />}
             ></TextInput>
             <AppButton onPress={handleSubmit} title="Login" />
@@ -81,7 +76,7 @@ export default function SignInScreen({ navigation }: any) {
                   textDecorationLine: "underline",
                 }}
               >
-                Already have an account? Sign in
+                Še nimate računa? Registrirajte se!
               </Text>
             </TouchableOpacity>
           </Flex>

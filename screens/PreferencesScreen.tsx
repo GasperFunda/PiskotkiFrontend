@@ -43,6 +43,7 @@ export default function PreferencesScreen({ navigation }: any) {
         setMotherName(res.data.name_mother);
         setFatherName(res.data.name_father);
         setOtherKidsNames(res.data.other_kids_names);
+        setGender(res.data.gender);
         if (res.data.length_long) nameLength.push("long");
         if (res.data.length_medium) nameLength.push("medium");
         if (res.data.length_short) nameLength.push("short");
@@ -50,6 +51,7 @@ export default function PreferencesScreen({ navigation }: any) {
         if (res.data.style_classic) nameStyle.push("traditional");
         setNameLength(nameLength);
         setNameStyle(nameStyle);
+        console.log(res.data);
       },
       (err) => {
         console.log(err.response?.data);
@@ -71,6 +73,8 @@ export default function PreferencesScreen({ navigation }: any) {
       name_father: formValues.fatherName,
       name_mother: formValues.motherName,
     };
+    console.log(nameLength);
+
     console.log(requestData);
 
     create(
@@ -164,6 +168,8 @@ export default function PreferencesScreen({ navigation }: any) {
                   }
                   onPress={() => {
                     if (nameLength.includes("medium")) {
+                      console.log("wer here");
+
                       setNameLength(
                         nameLength.filter((item) => item !== "medium")
                       );
