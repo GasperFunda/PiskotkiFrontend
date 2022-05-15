@@ -31,8 +31,9 @@ import {
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import HomeScreen from "../screens/HomeScreen";
-import { NamesByYearScreen } from "../screens/NamesByYearScreen";
+import NamesByYearScreen from "../screens/NamesByYearScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import NamesByYearDetailsList from "../components/NamesByYearList/NamesByYearDetailsList";
 
 export default function Navigation({
   colorScheme,
@@ -110,6 +111,11 @@ function AppNavigator() {
         name="NotFound"
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
+      />
+      <Stack.Screen
+        name="NamesByYearDetails"
+        component={NamesByYearDetailsList}
+        options={{ title: "Statistika" }}
       />
       <Stack.Screen
         name="SignIn"
