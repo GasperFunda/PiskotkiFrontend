@@ -16,7 +16,7 @@ export default function Home() {
 	const [cards, setCards] = React.useState<Array<string>>([]);
 	const [allNames, setNames] = React.useState<
 		Array<{ babyName: string; key: string }>
-	>([]);
+	>([{ babyName: "", key: "" }]);
 	const [swipedIndex, setSwipedIndex] = React.useState<number>(0);
 
 	React.useEffect(() => {
@@ -54,7 +54,8 @@ export default function Home() {
 			"nameAction",
 			{ action: "dislike", name: allNames[allNames.length - 1].key },
 			(res) => {
-				console.log(res);
+				//console.log(res);
+				console.log("dislike");
 			},
 			(err) => {}
 		);
@@ -62,11 +63,13 @@ export default function Home() {
 
 	const likeName = () => {
 		setSwipedIndex(swipedIndex + 1);
+		console.log(allNames);
+
 		create(
 			"nameAction",
 			{ action: "like", name: allNames[allNames.length - 1].key },
 			(res) => {
-				console.log(res);
+				console.log("like");
 			},
 			(err) => {}
 		);
@@ -78,7 +81,7 @@ export default function Home() {
 			"nameAction",
 			{ action: "superlike", name: allNames[allNames.length - 1].key },
 			(res) => {
-				console.log(res);
+				console.log("superlike");
 			},
 			(err) => {}
 		);
@@ -169,20 +172,3 @@ export default function Home() {
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: "center",
-		justifyContent: "center",
-	},
-	title: {
-		fontSize: 20,
-		fontWeight: "bold",
-	},
-	separator: {
-		marginVertical: 30,
-		height: 1,
-		width: "80%",
-	},
-});
