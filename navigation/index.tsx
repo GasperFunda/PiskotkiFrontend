@@ -85,7 +85,7 @@ function AuthNavigator() {
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
-        options={{ title: "Baby generator" }}
+        options={{ title: "Dojenčkonet" }}
       />
       <Stack.Screen
         name="NotFound"

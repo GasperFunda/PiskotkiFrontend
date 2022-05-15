@@ -61,19 +61,19 @@ export default function NamesByYearDetailsList({ route, navigation }: any) {
 
       {selectedItem === 0 ? (
         <>
-          <NamesByYearDetailsItem name={"Franc"} numberOfPeople={40000} />
-          <NamesByYearDetailsItem name={"Jožef"} numberOfPeople={35000} />
-          <NamesByYearDetailsItem name={"Janez"} numberOfPeople={30000} />
-          <NamesByYearDetailsItem name={"Marko"} numberOfPeople={25000} />
-          <NamesByYearDetailsItem name={"Andraž"} numberOfPeople={20000} />
+          <NamesByYearDetailsItem name={"Franc"} numberOfPeople={44326} />
+          <NamesByYearDetailsItem name={"Jožef"} numberOfPeople={32981} />
+          <NamesByYearDetailsItem name={"Janez"} numberOfPeople={29812} />
+          <NamesByYearDetailsItem name={"Marko"} numberOfPeople={23231} />
+          <NamesByYearDetailsItem name={"Andraž"} numberOfPeople={19212} />
         </>
       ) : (
         <>
-          <NamesByYearDetailsItem name={"Marija"} numberOfPeople={40000} />
-          <NamesByYearDetailsItem name={"Ana"} numberOfPeople={35000} />
-          <NamesByYearDetailsItem name={"Nika"} numberOfPeople={30000} />
-          <NamesByYearDetailsItem name={"Marjana"} numberOfPeople={25000} />
-          <NamesByYearDetailsItem name={"Zofka"} numberOfPeople={20000} />
+          <NamesByYearDetailsItem name={"Marija"} numberOfPeople={41051} />
+          <NamesByYearDetailsItem name={"Ana"} numberOfPeople={36901} />
+          <NamesByYearDetailsItem name={"Nika"} numberOfPeople={32775} />
+          <NamesByYearDetailsItem name={"Marjana"} numberOfPeople={23478} />
+          <NamesByYearDetailsItem name={"Zofka"} numberOfPeople={20091} />
         </>
       )}
     </ScrollView>
