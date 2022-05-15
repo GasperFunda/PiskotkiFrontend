@@ -39,23 +39,6 @@ export default function Navigation({
 }: {
   colorScheme: ColorSchemeName;
 }) {
-  return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-    >
-      <RootNavigator />
-    </NavigationContainer>
-  );
-}
-
-/**
- * A root stack navigator is often used for displaying modals on top of all other content.
- * https://reactnavigation.org/docs/modal
- */
-const Stack = createNativeStackNavigator<RootStackParamList>();
-
-function RootNavigator() {
   const [user, setUser] = React.useState(false);
   React.useEffect(() => {
     const checkUser = async () => {
@@ -67,22 +50,37 @@ function RootNavigator() {
     };
     checkUser();
   }, []);
+
+  return (
+    <NavigationContainer
+      linking={LinkingConfiguration}
+      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+    >
+      {!user ? <AuthNavigator /> : <AppNavigator />}
+    </NavigationContainer>
+  );
+}
+
+/**
+ * A root stack navigator is often used for displaying modals on top of all other content.
+ * https://reactnavigation.org/docs/modal
+ */
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+function AuthNavigator() {
   return (
     <Stack.Navigator>
-      {!user && (
-        <>
-          <Stack.Screen
-            name="SignIn"
-            component={SignInScreen}
-            options={{ title: "Prijava" }}
-          />
-          <Stack.Screen
-            name="SignUp"
-            component={SignUpScreen}
-            options={{ title: "Registracija" }}
-          />
-        </>
-      )}
+      <Stack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{ title: "Prijava" }}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUpScreen}
+        options={{ title: "Registracija" }}
+      />
+
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
@@ -92,6 +90,36 @@ function RootNavigator() {
         name="NotFound"
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
+      />
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen name="Modal" component={ModalScreen} />
+      </Stack.Group>
+    </Stack.Navigator>
+  );
+}
+
+function AppNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Root"
+        component={BottomTabNavigator}
+        options={{ title: "Baby generator" }}
+      />
+      <Stack.Screen
+        name="NotFound"
+        component={NotFoundScreen}
+        options={{ title: "Oops!" }}
+      />
+      <Stack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{ title: "Prijava" }}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUpScreen}
+        options={{ title: "Registracija" }}
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />

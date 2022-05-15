@@ -10,7 +10,7 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
-import { Checkbox, RadioButton } from "react-native-paper";
+import { Checkbox, RadioButton, Snackbar } from "react-native-paper";
 import AppLabel from "../components/AppLabel";
 import { get } from "../api/get";
 import { create } from "../api/create";
@@ -31,11 +31,25 @@ export default function PreferencesScreen({ navigation }: any) {
   const [motherName, setMotherName] = React.useState("");
   const [fatherName, setFatherName] = React.useState("");
   const [otherKidsNames, setOtherKidsNames] = React.useState("");
+  const [snackbarVisible, setSnackbarVisible] = React.useState(false);
   React.useEffect(() => {
     get(
       "settings",
       (res) => {
-        console.log(res.data);
+        const nameLength = [];
+        const nameStyle = [];
+        setInitialLetter(res.data.first_character);
+        setEndingLetter(res.data.last_character);
+        setMotherName(res.data.name_mother);
+        setFatherName(res.data.name_father);
+        setOtherKidsNames(res.data.other_kids_names);
+        if (res.data.length_long) nameLength.push("long");
+        if (res.data.length_medium) nameLength.push("medium");
+        if (res.data.length_short) nameLength.push("short");
+        if (res.data.style_modern) nameStyle.push("modern");
+        if (res.data.style_classic) nameStyle.push("traditional");
+        setNameLength(nameLength);
+        setNameStyle(nameStyle);
       },
       (err) => {
         console.log(err.response?.data);
@@ -63,7 +77,7 @@ export default function PreferencesScreen({ navigation }: any) {
       "settings",
       requestData,
       (res) => {
-        console.log(res.data);
+        setSnackbarVisible(true);
       },
       (err) => {
         console.log(err.response?.data);
@@ -273,6 +287,13 @@ export default function PreferencesScreen({ navigation }: any) {
           </>
         )}
       </Formik>
+      <Snackbar
+        onDismiss={() => setSnackbarVisible(false)}
+        visible={snackbarVisible}
+        duration={2000}
+      >
+        Successfully saved user settings!
+      </Snackbar>
     </ScrollView>
   );
 }

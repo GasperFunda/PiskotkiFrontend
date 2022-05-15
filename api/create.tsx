@@ -16,7 +16,6 @@ export async function create<Type>(
       },
     })
     .then((res) => {
-      console.log(REACT_APP_BASE_API_URL + "/" + link);
       successCallback(res);
     })
     .catch((err) => errorCallback(err));
