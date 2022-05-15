@@ -1,10 +1,10 @@
 import * as React from "react";
 import { SuperLikeList } from "../components/SuperLikeList/SuperLikeList";
 
-export function SuperLikeListScreen() {
+export function SuperLikeListScreen({ navigation }: any) {
   return (
     <>
-      <SuperLikeList />
+      <SuperLikeList navigation={navigation} />
     </>
   );
 }
