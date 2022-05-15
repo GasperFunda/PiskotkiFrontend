@@ -1,10 +1,10 @@
 import * as React from "react";
 import NamesByYearList from "../components/NamesByYearList/NamesByYearList";
 
-export function NamesByYearScreen() {
+export default function NamesByYearScreen({ navigation }: any) {
   return (
     <>
-      <NamesByYearList />
+      <NamesByYearList navigation={navigation} />
     </>
   );
 }

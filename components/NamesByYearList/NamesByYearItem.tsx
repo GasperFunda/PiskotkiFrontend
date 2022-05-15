@@ -5,23 +5,21 @@ import { Card } from "react-native-paper";
 import Navigation from "../../navigation";
 
 export interface INamesByYearItemProps {
-	year: number;
+  navigation: any;
+  year: number;
 }
 
-export default function NamesByYearItem(
-	props: INamesByYearItemProps,
-	{ navigation }: any
-) {
-	return (
-		<Card
-			style={{ margin: 5 }}
-			onPress={() =>
-				navigation.navigate("NamesByYearDetailsItem", {
-					year: props.year,
-				})
-			}
-		>
-			<Card.Title title={props.year}></Card.Title>
-		</Card>
-	);
+export default function NamesByYearItem(props: INamesByYearItemProps) {
+  return (
+    <Card
+      style={{ margin: 5 }}
+      onPress={() =>
+        props.navigation.navigate("NamesByYearDetails", {
+          year: props.year,
+        })
+      }
+    >
+      <Card.Title title={props.year}></Card.Title>
+    </Card>
+  );
 }

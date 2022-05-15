@@ -1,7 +1,7 @@
 import { Flex } from "@react-native-material/core";
 import * as React from "react";
 import { Card } from "react-native-paper";
-import AppText from "../AppText";
+import AppTextDark from "../AppTextDark";
 
 export interface INamesByYearDetailsItemProps {
   name: string;
@@ -17,7 +17,7 @@ export default function NamesByYearDetailsItem(
         title={props.name}
         right={() => (
           <Flex direction="row">
-            <AppText>{props.numberOfPeople.toString()}</AppText>
+            <AppTextDark>{props.numberOfPeople.toString()}</AppTextDark>
           </Flex>
         )}
       ></Card.Title>

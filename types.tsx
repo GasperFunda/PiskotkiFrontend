@@ -17,6 +17,7 @@ declare global {
 }
 
 export type RootStackParamList = {
+  NamesByYearDetails: undefined;
   Preferences: undefined;
   SuperLikeList: undefined;
   SignIn: undefined;
